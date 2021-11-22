@@ -1,0 +1,38 @@
+{
+  "name": "express-juin",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www",
+    "start:dev": "nodemon ./bin/www",
+    "test": "npm run test:db:migrate && NODE_ENV=test mocha --recursive --exit",
+    "test:db:create": "NODE_ENV=test node scripts/database/create-test-db",
+    "test:db:delete": "NODE_ENV=test node scripts/database/delete-test-db",
+    "test:db:migrate": "npm run knex -- migrate:latest --env test",
+    "test:db:reset": "npm run test:db:delete && npm run test:db:create && npm run test:db:migrate",
+    "db:create": "node scripts/database/create-dev-db",
+    "db:delete": "node scripts/database/delete-dev-db",
+    "db:migrate": "npm run knex --  migrate:latest",
+    "db:new_migration": "npm run knex --  migrate:make new_migration",
+    "db:prepare": "npm run db:delete && npm run db:create && npm run db:migrate",
+    "db:seed": "npm run knex -- seed:run",
+    "db:reset": "npm run db:prepare && npm run db:seed",
+    "knex": "knex --knexfile db/knexfile.js"
+  },
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "knex": "^0.95.14",
+    "pg": "^8.7.1"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
+    "chai-http": "^4.3.0",
+    "faker": "^5.5.3",
+    "mocha": "^7.1.1",
+    "nodemon": "^2.0.2",
+    "sinon": "^9.0.1",
+    "sinon-chai": "^3.5.0"
+  }
+}

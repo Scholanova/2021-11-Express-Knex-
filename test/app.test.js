@@ -3,7 +3,7 @@ const { expect, sinon, request, knex } = require('./test-helper')
 const app = require('../lib/app')
 
 afterEach(async () => {
-  await knex.raw('truncate table users')
+  await knex('users').del()
 })
 
 // Verification que tout est fonctionnel

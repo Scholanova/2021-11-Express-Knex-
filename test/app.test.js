@@ -55,7 +55,7 @@ describe('appel GET /users', () => {
 // Question 1
 // Récupérer un utilisateur existant en base de données par Id
 // Body de retour : { name: userName, id: userId }
-describe.skip('appel GET /users/:id user existant', () => {
+describe('appel GET /users/:id user existant', () => {
   let response
   let john
 
@@ -65,7 +65,7 @@ describe.skip('appel GET /users/:id user existant', () => {
     }).returning('*')
     john = createdUsers[0]
 
-    response = await request(app).get(`users/${john.id}`)
+    response = await request(app).get(`/users/${john.id}`)
   })
 
   afterEach(async () => {
@@ -93,7 +93,7 @@ describe.skip('appel GET /users/:id user non existant', () => {
 
   beforeEach(async () => {
     randomId = faker.uuid.v4()
-    response = await request(app).get(`users/${randomId}`)
+    response = await request(app).get(`/users/${randomId}`)
   })
 
   it('le status de réponse est 404', () => {
@@ -120,7 +120,7 @@ describe.skip('appel POST /users avec des données valides', () => {
   beforeEach(async () => {
     johnName = 'John'
     response = await request(app)
-      .post('users')
+      .post('/users')
       .send({ name: johnName })
   })
 
@@ -152,7 +152,7 @@ describe.skip('appel POST /users avec des données invalides', () => {
 
   beforeEach(async () => {
     response = await request(app)
-      .post('users')
+      .post('/users')
       .send({ name: '' })
   })
 
@@ -189,7 +189,7 @@ describe.skip('appel GET /users/:userId/shoes pour user existant', () => {
       brand: 'Rebokk',
     }).returning('*')
 
-    response = await request(app).get(`users/${john.id}/shoes`)
+    response = await request(app).get(`/users/${john.id}/shoes`)
   })
 
   afterEach(async () => {
@@ -220,7 +220,7 @@ describe.skip('appel GET /users/:userId/shoes pour user inexistant', () => {
 
   beforeEach(async () => {
     randomId = faker.uuid.v4()
-    response = await request(app).get(`users/${randomId}/shoes`)
+    response = await request(app).get(`/users/${randomId}/shoes`)
   })
 
   it('le status de réponse est 404', () => {

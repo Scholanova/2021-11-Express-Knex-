@@ -1,8 +1,6 @@
+const faker = require('faker')
 const { expect, sinon, request, knex } = require('./test-helper')
 const app = require('../lib/app')
-
-beforeEach(() => {
-})
 
 // Verification que tout est fonctionnel
 describe('un test qui est vert', () => {
@@ -92,7 +90,7 @@ describe.skip('appel GET /users/:id user non existant', () => {
   let randomId
 
   beforeEach(async () => {
-    randomId = faker.uuid.v4()
+    randomId = faker.random.uuid()
     response = await request(app).get(`/users/${randomId}`)
   })
 
@@ -219,7 +217,7 @@ describe.skip('appel GET /users/:userId/shoes pour user inexistant', () => {
   let randomId
 
   beforeEach(async () => {
-    randomId = faker.uuid.v4()
+    randomId = faker.random.uuid()
     response = await request(app).get(`/users/${randomId}/shoes`)
   })
 

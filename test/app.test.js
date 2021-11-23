@@ -170,13 +170,17 @@ describe.skip('appel GET /users/:userId/shoes pour user existant', () => {
     }).returning('*')
     john = createdUsers[0]
 
-    johnShoes = await knex('users').insert({
-      model: 'Crocodile',
-      brand: 'Bacoste',
-    }, {
-      model: 'Originals',
-      brand: 'Rebokk',
-    }).returning('*')
+    johnShoes = await knex('shoes').insert([
+      {
+        model: 'Crocodile',
+        brand: 'Bacoste',
+        user_id: john.id,
+      }, {
+        model: 'Originals',
+        brand: 'Rebokk',
+        user_id: john.id,
+      },
+    ]).returning('*')
 
     response = await request(app).get(`/users/${john.id}/shoes`)
   })

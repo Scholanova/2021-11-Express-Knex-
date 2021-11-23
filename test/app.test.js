@@ -2,6 +2,10 @@ const faker = require('faker')
 const { expect, sinon, request, knex } = require('./test-helper')
 const app = require('../lib/app')
 
+afterEach(async () => {
+  await knex.raw('truncate table users')
+})
+
 // Verification que tout est fonctionnel
 describe('un test qui est vert', () => {
   let response
@@ -35,10 +39,6 @@ describe('appel GET /users', () => {
     response = await request(app).get('/users')
   })
 
-  afterEach(async () => {
-    await knex('users').where({ id: john.id }).del()
-  })
-
   it('le status de réponse est 200', () => {
     expect(response).to.have.status(200)
   })
@@ -52,7 +52,7 @@ describe('appel GET /users', () => {
 
 // Question 1
 // Récupérer un utilisateur existant en base de données par Id
-// Body de retour : { name: userName, id: userId }
+// Body de retour : { user: { name: userName, id: userId }}
 describe('appel GET /users/:id user existant', () => {
   let response
   let john
@@ -64,10 +64,6 @@ describe('appel GET /users/:id user existant', () => {
     john = createdUsers[0]
 
     response = await request(app).get(`/users/${john.id}`)
-  })
-
-  afterEach(async () => {
-    await knex('users').where({ id: john.id }).del()
   })
 
   it('le status de réponse est 200', () => {
@@ -85,12 +81,12 @@ describe('appel GET /users/:id user existant', () => {
 // Si l'utilisateur n'existe pas en base de donnée
 // Alors retourner une 404
 // Body de retour : { error: 'User not found' }
-describe.skip('appel GET /users/:id user non existant', () => {
+describe('appel GET /users/:id user non existant', () => {
   let response
   let randomId
 
   beforeEach(async () => {
-    randomId = faker.random.uuid()
+    randomId = faker.datatype.uuid()
     response = await request(app).get(`/users/${randomId}`)
   })
 
@@ -109,21 +105,16 @@ describe.skip('appel GET /users/:id user non existant', () => {
 // En passant un name on peut créer un utilisateur
 // L'utilisateur est retourné après avoir été créé
 // Body de requête : { name: userName }
-// Body de retour : { name: userName, id: idGénéréPasLaBaseDeDonnée }
-describe.skip('appel POST /users avec des données valides', () => {
+// Body de retour : { user : { name: userName, id: idGénéréPasLaBaseDeDonnée }}
+describe('appel POST /users avec des données valides', () => {
   let response
   let johnName
-  let john
 
   beforeEach(async () => {
     johnName = 'John'
     response = await request(app)
       .post('/users')
       .send({ name: johnName })
-  })
-
-  afterEach(async () => {
-    await knex('users').where({ id: john.id }).del()
   })
 
   it('le status de réponse est 200', () => {
@@ -190,10 +181,6 @@ describe.skip('appel GET /users/:userId/shoes pour user existant', () => {
     response = await request(app).get(`/users/${john.id}/shoes`)
   })
 
-  afterEach(async () => {
-    await knex('users').where({ id: john.id }).del()
-  })
-
   it('le status de réponse est 200', () => {
     expect(response).to.have.status(200)
   })
@@ -217,7 +204,7 @@ describe.skip('appel GET /users/:userId/shoes pour user inexistant', () => {
   let randomId
 
   beforeEach(async () => {
-    randomId = faker.random.uuid()
+    randomId = faker.datatype.uuid()
     response = await request(app).get(`/users/${randomId}/shoes`)
   })
 

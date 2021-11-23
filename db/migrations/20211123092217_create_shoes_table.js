@@ -7,8 +7,9 @@ exports.up = function (knex) {
       .primary()
     table.string('brand')
     table.string('model')
+    table.uuid('user_id').notNullable()
     table
-      .foreign('user_ui')
+      .foreign('user_id')
       .references('users.id')
       .onDelete('CASCADE')
   })

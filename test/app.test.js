@@ -136,7 +136,7 @@ describe('appel POST /users avec des données valides', () => {
 // Une erreur 422 est retournée
 // Body de requête : { name: '' } (avec chaine de char vide)
 // Body de retour : { error: 'User name cannot be empty' }
-describe.skip('appel POST /users avec des données invalides', () => {
+describe('appel POST /users avec des données invalides', () => {
   let response
 
   beforeEach(async () => {

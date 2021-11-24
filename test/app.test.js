@@ -3,6 +3,7 @@ const { expect, sinon, request, knex } = require('./test-helper')
 const app = require('../lib/app')
 
 afterEach(async () => {
+  await knex('shoes').del()
   await knex('users').del()
 })
 
@@ -159,7 +160,7 @@ describe('appel POST /users avec des données invalides', () => {
 // Question 5
 // Récupérer les chaussures d'un utilisateur existant en base de données
 // Body de retour : { shoes: [{id: shoeId, model: modelName, brand: brandName}] }
-describe.skip('appel GET /users/:userId/shoes pour user existant', () => {
+describe('appel GET /users/:userId/shoes pour user existant', () => {
   let response
   let john
   let johnShoes
@@ -203,7 +204,7 @@ describe.skip('appel GET /users/:userId/shoes pour user existant', () => {
 // Récupérer les chaussures d'un utilisateur qui n'existe pas en base de données
 // Alors retourner une 404
 // Body de retour : { error: 'User not found' }
-describe.skip('appel GET /users/:userId/shoes pour user inexistant', () => {
+describe('appel GET /users/:userId/shoes pour user inexistant', () => {
   let response
   let randomId
 

@@ -228,7 +228,7 @@ describe('appel GET /users/:userId/shoes pour user inexistant', () => {
 // Pouvoir ajouter une nouvelle paire de chaussures à un utilisateur existant
 // Body de requête : { model, brand }
 // Body de retour : { shoe: { ... } }
-describe.skip('appel POST /users/:userId/shoes avec des données valides', () => {
+describe('appel POST /users/:userId/shoes avec des données valides', () => {
   let response
   let john
   let newShoeBrand
@@ -267,7 +267,7 @@ describe.skip('appel POST /users/:userId/shoes avec des données valides', () =>
 // Tenter ajouter une nouvelle paire de chaussures à un utilisateur qui n'existe pas
 // Alors retourner une 404
 // Body de retour : { error: 'User not found' }
-describe.skip('appel POST /users/:userId/shoes pour un utilisateur qui n’existe pas', () => {
+describe('appel POST /users/:userId/shoes pour un utilisateur qui n’existe pas', () => {
   let response
   let randomId
   let newShoeBrand
@@ -299,7 +299,7 @@ describe.skip('appel POST /users/:userId/shoes pour un utilisateur qui n’exist
 // Calculer la valeur de la collection de chaussure d'un utilisateur en appelant /users/:userId/collection-value
 // Les chaussures qu'ils a valent toute 100 de base
 // Body de retour : { value: 200 }
-describe.skip('appel GET /users/:userId/collection-value pour user existant', () => {
+describe('appel GET /users/:userId/collection-value pour user existant', () => {
   let response
   let john
   let johnShoes
@@ -342,7 +342,7 @@ describe.skip('appel GET /users/:userId/collection-value pour user existant', ()
 // mais les Bacoste valent 150
 // et les Bucci valent 250
 // Body de retour : { value: 200 }
-describe.skip('appel GET /users/:userId/collection-value pour user existant pour de meilleurs chaussures', () => {
+describe('appel GET /users/:userId/collection-value pour user existant pour de meilleurs chaussures', () => {
   let response
   let john
   let johnShoes
@@ -409,7 +409,7 @@ describe.skip('appel GET /users/:userId/collection-value pour user existant pour
 // DELETE /users/:id
 // Cela supprime un utilisateur donné mais pas les autres utilisatuers
 // Alors retourner une 204 sans body de retour
-describe.skip('appel DELETE /users/:userId pour user existant', () => {
+describe('appel DELETE /users/:userId pour user existant', () => {
   let response
   let john
   let johnShoes
@@ -490,7 +490,7 @@ describe.skip('appel DELETE /users/:userId pour user existant', () => {
 // Supprimer un utilisateur qui n'existe pas
 // Alors retourner une 404
 // Body de retour : { error: 'User not found' }
-describe.skip('appel DELETE /users/:userId pour user non existant', () => {
+describe('appel DELETE /users/:userId pour user non existant', () => {
   let response
   let john
   let johnShoes
@@ -551,7 +551,7 @@ describe.skip('appel DELETE /users/:userId pour user non existant', () => {
 // ⚠️ ⚠️ ⚠️ Les marques seront ordonnées par ordre alphabétique ️⚠️ ⚠️ ⚠️
 // GET /brands
 // Body de retour : { brands: ['Baccoste', 'Rebokk'] }
-describe.skip('appel GET /brands', () => {
+describe('appel GET /brands', () => {
   let response
   let john
   let johnShoes
@@ -620,7 +620,7 @@ describe.skip('appel GET /brands', () => {
 // GET /models
 // Status de retour : 200
 // Body de retour : { models: ['Regular'] }
-describe.skip('appel GET /models', () => {
+describe('appel GET /models', () => {
   let response
   let john
   let johnShoes
@@ -690,7 +690,7 @@ describe.skip('appel GET /models', () => {
 // GET /models?brand=Bacoste
 // Status de retour : 200
 // Body de retour : { models: ['Regular'] }
-describe.skip('appel GET /models?brand=:brandName', () => {
+describe('appel GET /models?brand=:brandName', () => {
   let response
   let john
   let johnShoes
